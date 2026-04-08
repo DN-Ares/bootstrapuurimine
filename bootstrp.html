@@ -1,1 +1,649 @@
 
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loodusretked Eestis</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --forest: #1a3a2a;
+      --moss: #4a7c59;
+      --bark: #8b6c4f;
+      --mist: #d8e8df;
+      --cream: #f5f0e8;
+      --amber: #c8852a;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--cream);
+      color: var(--forest);
+    }
+
+    /* NAVBAR */
+    .navbar-custom {
+      background-color: var(--forest);
+      border-bottom: 3px solid var(--amber);
+    }
+    .navbar-custom .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--mist) !important;
+      letter-spacing: 1px;
+    }
+    .navbar-custom .nav-link {
+      color: var(--mist) !important;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .navbar-custom .nav-link:hover {
+      color: var(--amber) !important;
+    }
+    .navbar-custom .navbar-toggler {
+      border-color: var(--mist);
+    }
+    .navbar-custom .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--forest) 0%, var(--moss) 60%, var(--bark) 100%);
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 10V8zm0 4L52 0h2L40 14v-2zm0 4L56 0h2L40 18v-2zm0 4L60 0h2L40 22v-2zm0 4L64 0h2L40 26v-2zm0 4L68 0h2L40 30v-2zm0 4L72 0h2L40 34v-2zm0 4L76 0h2L40 38v-2zm0 4L80 0v2L42 40h-2zm4 0L80 4v2L46 40h-2zm4 0L80 8v2L50 40h-2zm4 0L80 12v2L54 40h-2zm4 0L80 16v2L58 40h-2zm4 0L80 20v2L62 40h-2zm4 0L80 24v2L66 40h-2zm4 0L80 28v2L70 40h-2zm4 0L80 32v2L74 40h-2zm4 0L80 36v2L78 40h-2zm4 0L80 40v-2h-2zm-4-40L44 0h2l34 34v2L64 0h-2zm-4 0L48 0h2l30 30v2L60 0h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .hero-title span {
+      color: var(--amber);
+    }
+    .hero-subtitle {
+      color: var(--mist);
+      font-size: 1.2rem;
+      font-weight: 300;
+      max-width: 520px;
+    }
+    .btn-amber {
+      background-color: var(--amber);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 2px;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-amber:hover {
+      background-color: #a86e1e;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .btn-outline-mist {
+      border: 2px solid var(--mist);
+      color: var(--mist);
+      background: transparent;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline-mist:hover {
+      background: var(--mist);
+      color: var(--forest);
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--forest);
+    }
+    .divider {
+      width: 60px;
+      height: 4px;
+      background: var(--amber);
+      margin: 0.5rem 0 1.5rem 0;
+    }
+
+    /* CARDS */
+    .trail-card {
+      border: none;
+      border-radius: 0;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(26, 58, 42, 0.10);
+      transition: transform 0.25s, box-shadow 0.25s;
+      overflow: hidden;
+    }
+    .trail-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(26, 58, 42, 0.18);
+    }
+    .trail-card .card-img-placeholder {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .trail-card .card-body {
+      padding: 1.4rem 1.6rem 1.6rem;
+    }
+    .trail-card .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--forest);
+    }
+    .badge-moss {
+      background-color: var(--moss);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.75rem;
+      border-radius: 2px;
+    }
+    .badge-bark {
+      background-color: var(--bark);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.75rem;
+      border-radius: 2px;
+    }
+
+    /* STATS STRIP */
+    .stats-strip {
+      background-color: var(--forest);
+      color: var(--mist);
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: var(--amber);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ACCORDION */
+    .accordion-custom .accordion-button {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 600;
+      background-color: #fff;
+      color: var(--forest);
+      box-shadow: none;
+    }
+    .accordion-custom .accordion-button:not(.collapsed) {
+      background-color: var(--mist);
+      color: var(--forest);
+    }
+    .accordion-custom .accordion-button::after {
+      filter: hue-rotate(120deg) saturate(2);
+    }
+    .accordion-custom .accordion-item {
+      border: 1px solid #d0ddd6;
+      border-radius: 0 !important;
+      margin-bottom: 0.5rem;
+    }
+
+    /* FORM */
+    .form-section {
+      background: linear-gradient(160deg, var(--forest) 0%, var(--moss) 100%);
+      color: #fff;
+    }
+    .form-section .section-title {
+      color: #fff;
+    }
+    .form-control-custom {
+      border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-family: 'Source Sans 3', sans-serif;
+    }
+    .form-control-custom::placeholder {
+      color: rgba(255,255,255,0.55);
+    }
+    .form-control-custom:focus {
+      border-color: var(--amber);
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(200, 133, 42, 0.25);
+    }
+    .form-label-custom {
+      color: var(--mist);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* PROGRESS */
+    .progress-custom {
+      border-radius: 2px;
+      height: 10px;
+      background: rgba(255,255,255,0.15);
+    }
+    .progress-bar-moss { background-color: var(--moss); }
+    .progress-bar-amber { background-color: var(--amber); }
+    .progress-bar-bark { background-color: var(--bark); }
+
+    /* TOAST */
+    .toast-container-custom {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1100;
+    }
+
+    /* ALERT */
+    .alert-forest {
+      background-color: var(--mist);
+      border-left: 5px solid var(--moss);
+      border-radius: 0;
+      color: var(--forest);
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #111e17;
+      color: var(--mist);
+    }
+    footer a { color: var(--amber); text-decoration: none; }
+    footer a:hover { color: #fff; }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== 1. NAVBAR (komponent) ===== -->
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">🌲 Loodusretked</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item"><a class="nav-link" href="#rajad">Rajad</a></li>
+        <li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
+        <li class="nav-item"><a class="nav-link" href="#kontakt">Kontakt</a></li>
+        <li class="nav-item">
+          <button class="btn btn-amber btn-sm ms-2" id="toastBtn">Telli uudiskiri</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero">
+  <div class="container py-5 position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <h1 class="hero-title mb-3">Avasta<br/><span>Eesti loodust</span><br/>sammhaaval.</h1>
+        <p class="hero-subtitle mb-4">Sügavad metsad, kõlisevad ojad ja tuulised rannaniidud ootavad. Leia oma järgmine seiklus siit.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="#rajad" class="btn btn-amber px-4">Vaata radasid</a>
+          <a href="#kontakt" class="btn btn-outline-mist px-4">Liitu kogukonnaga</a>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-flex justify-content-center" style="font-size:9rem;opacity:0.18;user-select:none;">
+        🌲
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. ALERT (komponent) ===== -->
+<div class="container mt-4">
+  <div class="alert alert-forest d-flex align-items-center gap-2" role="alert">
+    <span style="font-size:1.3rem;">⚠️</span>
+    <div><strong>Hooajaline teade:</strong> Lahemaa rahvuspargi mõned rajad on kevadiste üleujutuste tõttu ajutiselt suletud. Kontrolli ajakohast infot enne väljumist.</div>
+    <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"></button>
+  </div>
+</div>
+
+<!-- ===== STATS STRIP (Grid) ===== -->
+<section class="stats-strip py-5 mt-2">
+  <div class="container">
+    <div class="row text-center gy-4">
+      <div class="col-6 col-md-3">
+        <div class="stat-number">340+</div>
+        <div class="stat-label mt-1">Matkarada</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-number">12</div>
+        <div class="stat-label mt-1">Rahvusparki</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-number">1800</div>
+        <div class="stat-label mt-1">km matkateid</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-number">4</div>
+        <div class="stat-label mt-1">Aastaaega</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. CARDS (komponent) + Grid ===== -->
+<section id="rajad" class="py-6 py-5">
+  <div class="container">
+    <h2 class="section-title">Populaarsed rajad</h2>
+    <div class="divider"></div>
+    <div class="row gy-4">
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card trail-card h-100">
+          <div class="card-img-placeholder" style="background:#d8e8df;">🌲</div>
+          <div class="card-body">
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge badge-moss">Lihtne</span>
+              <span class="badge badge-bark">5,2 km</span>
+            </div>
+            <h5 class="card-title">Lahemaa ranniku ring</h5>
+            <p class="card-text text-muted small">Kaunis rannarada läbi männikute ja paekaldaste mereäärde. Sobib lastega peredele.</p>
+            <a href="#" class="btn btn-amber btn-sm mt-2">Vaata rada</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card trail-card h-100">
+          <div class="card-img-placeholder" style="background:#e8e0d8;">🏔️</div>
+          <div class="card-body">
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge badge-bark">Keskmine</span>
+              <span class="badge badge-moss">12,8 km</span>
+            </div>
+            <h5 class="card-title">Soomaa üleujutusretk</h5>
+            <p class="card-text text-muted small">Kevadine veetase muudab soo ainulaadseks veemaastikuks. Soovitame vihmakindlaid jalanõusid.</p>
+            <a href="#" class="btn btn-amber btn-sm mt-2">Vaata rada</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card trail-card h-100">
+          <div class="card-img-placeholder" style="background:#1a3a2a;color:rgba(255,255,255,0.3);">🌙</div>
+          <div class="card-body">
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge" style="background:#c0392b;color:#fff;">Raske</span>
+              <span class="badge badge-bark">23 km</span>
+            </div>
+            <h5 class="card-title">Karula kõrgustik</h5>
+            <p class="card-text text-muted small">Eesti kõige mägilaadsem maastik. Kõrgustiku tippudelt avanevad hingemattavad vaated.</p>
+            <a href="#" class="btn btn-amber btn-sm mt-2">Vaata rada</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card trail-card h-100">
+          <div class="card-img-placeholder" style="background:#e8f0e8;">🦅</div>
+          <div class="card-body">
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge badge-moss">Lihtne</span>
+              <span class="badge badge-bark">3,5 km</span>
+            </div>
+            <h5 class="card-title">Matsalu linnuvaatlus</h5>
+            <p class="card-text text-muted small">Eesti parim koht lindude vaatlemiseks. Kevad-sügisene rändehooaeg toob siia tuhandeid linde.</p>
+            <a href="#" class="btn btn-amber btn-sm mt-2">Vaata rada</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card trail-card h-100">
+          <div class="card-img-placeholder" style="background:#f0e8d8;">🐺</div>
+          <div class="card-body">
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge badge-bark">Keskmine</span>
+              <span class="badge badge-moss">9,1 km</span>
+            </div>
+            <h5 class="card-title">Alutaguse loodusrada</h5>
+            <p class="card-text text-muted small">Põhja-Eesti tihedaim metsaala. Võimalus kohata põtru, hirvesid ja haruldasemaid liike.</p>
+            <a href="#" class="btn btn-amber btn-sm mt-2">Vaata rada</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card trail-card h-100">
+          <div class="card-img-placeholder" style="background:#d8e8ef;">🌊</div>
+          <div class="card-body">
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge badge-moss">Lihtne</span>
+              <span class="badge badge-bark">7,3 km</span>
+            </div>
+            <h5 class="card-title">Käsmu poolsaare ring</h5>
+            <p class="card-text text-muted small">Rannamaastik, rändrahnud ja meremajakad loovad unustamatu panoraami Soome lahele.</p>
+            <a href="#" class="btn btn-amber btn-sm mt-2">Vaata rada</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORM + PROGRESS SECTION (Grid) ===== -->
+<section class="form-section py-5" id="kontakt">
+  <div class="container">
+    <div class="row gy-5 align-items-start">
+
+      <!-- 4. FORM (komponent) -->
+      <div class="col-12 col-lg-6">
+        <h2 class="section-title mb-1">Liitu kogukonnaga</h2>
+        <div class="divider"></div>
+        <p style="color:var(--mist);font-weight:300;" class="mb-4">Saad esimesena teada uutest radadest, sündmustest ja looduskaitse uudistest.</p>
+        <div class="mb-3">
+          <label class="form-label form-label-custom">Ees- ja perekonnanimi</label>
+          <input type="text" class="form-control form-control-custom" placeholder="Mari Mets" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label form-label-custom">E-posti aadress</label>
+          <input type="email" class="form-control form-control-custom" placeholder="mari@näide.ee" />
+        </div>
+        <div class="mb-4">
+          <label class="form-label form-label-custom">Matkakogemus</label>
+          <select class="form-select form-control-custom">
+            <option value="" disabled selected>Vali tase...</option>
+            <option>Algaja – esimesed sammud</option>
+            <option>Harrastaja – matkame nädalavahetustel</option>
+            <option>Kogenud – pikad marsruudid</option>
+          </select>
+        </div>
+        <button class="btn btn-amber px-4">Liitu nüüd →</button>
+      </div>
+
+      <!-- Progress bars -->
+      <div class="col-12 col-lg-6">
+        <h2 class="section-title mb-1">Kogukonna statistika</h2>
+        <div class="divider"></div>
+        <p style="color:var(--mist);font-weight:300;" class="mb-4">Meie kasvav kogukond matkab Eestis aktiivselt läbi aasta.</p>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between mb-1" style="color:var(--mist);">
+            <span class="fw-600">Liikmeid registreeritud</span><span>8 420 / 10 000</span>
+          </div>
+          <div class="progress progress-custom"><div class="progress-bar progress-bar-moss" style="width:84%"></div></div>
+        </div>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between mb-1" style="color:var(--mist);">
+            <span>Sel aastal läbitud km</span><span>42 600 / 60 000</span>
+          </div>
+          <div class="progress progress-custom"><div class="progress-bar progress-bar-amber" style="width:71%"></div></div>
+        </div>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between mb-1" style="color:var(--mist);">
+            <span>Talgupäevi korraldatud</span><span>18 / 24</span>
+          </div>
+          <div class="progress progress-custom"><div class="progress-bar progress-bar-bark" style="width:75%"></div></div>
+        </div>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between mb-1" style="color:var(--mist);">
+            <span>Fotode üles laaditud</span><span>3 241 / 5 000</span>
+          </div>
+          <div class="progress progress-custom"><div class="progress-bar progress-bar-moss" style="width:65%"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. ACCORDION (komponent) ===== -->
+<section id="info" class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-8 mx-auto">
+        <h2 class="section-title text-center">Korduma kippuvad küsimused</h2>
+        <div class="divider mx-auto mb-4"></div>
+
+        <div class="accordion accordion-custom" id="faqAccordion">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                Kas matkaradadele on vaja luba?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Enamik matkaradasid on avalikult kasutatavad ilma eelneva loata. Mõned kaitsealad nõuavad registreerimist – kontrolli vastava rahvuspargi kodulehelt. Öömajadele (nt RMK varjualused) on soovitatav eelnevalt broneerida.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                Milline on parim aeg Eestis matkamiseks?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Iga aastaaeg pakub ainulaadset kogemust. Suvi on kõige soojem ja rajad kõige ligipääsetavamad. Sügis toob kirjud lehtedega metsad. Talv muudab sood läbitavaks ja jäised orud kutsuvad lumejalutust tegema. Kevad toob linnulaulu ja üleujutused Soomaale.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                Mida võtta matkale kaasa?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Soovitame alati kaasas olla: veekindlaid jalanõusid, ilmale vastavat rõivast (kihiliselt!), piisavalt vett ja toitu, esmaabikomplekti, kaarti või GPS-rakendust ning täislaetud mobiiltelefoni. Pikematele radadele lisaks ka lambikuninga ja vihmakeeba.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                Kas matkamine on lastele turvaline?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Jah! Eestis on palju hästi hooldatud ja lühikesi radasid, mis sobivad igale vanusele. Meie saidil on rajad märgistatud raskusastmetega, et saaksite valida perele sobivaima. Lahemaa ranniku ring ja Matsalu linnuvaatlusrada on eriti head valikud peredele.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. TOAST (komponent) ===== -->
+<div class="toast-container-custom">
+  <div id="myToast" class="toast align-items-center text-white border-0" role="alert" style="background-color:var(--forest);border-left:4px solid var(--amber) !important;">
+    <div class="d-flex">
+      <div class="toast-body">
+        ✅ <strong>Aitäh!</strong> Oled uudiskirjaga liitunud.
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER (Grid) ===== -->
+<footer class="py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-12 col-md-4">
+        <div class="footer-brand mb-2">🌲 Loodusretked</div>
+        <p class="small" style="color:#7a9a87;">Eesti looduse avastajate kogukond. Ühendame matkajaid, kaitseme loodust ja jagame seiklusi.</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 style="color:#fff;font-weight:700;letter-spacing:1px;font-size:.8rem;text-transform:uppercase;">Rajad</h6>
+        <ul class="list-unstyled small mt-2">
+          <li><a href="#">Lahemaa</a></li>
+          <li><a href="#">Soomaa</a></li>
+          <li><a href="#">Karula</a></li>
+          <li><a href="#">Matsalu</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 style="color:#fff;font-weight:700;letter-spacing:1px;font-size:.8rem;text-transform:uppercase;">Kogukond</h6>
+        <ul class="list-unstyled small mt-2">
+          <li><a href="#">Foorum</a></li>
+          <li><a href="#">Galerii</a></li>
+          <li><a href="#">Talgud</a></li>
+          <li><a href="#">Sündmused</a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-4">
+        <h6 style="color:#fff;font-weight:700;letter-spacing:1px;font-size:.8rem;text-transform:uppercase;">Võta ühendust</h6>
+        <p class="small mt-2" style="color:#7a9a87;">info@loodusretked.ee<br/>+372 5555 1234</p>
+      </div>
+    </div>
+    <hr style="border-color:#2a4a38;margin-top:2rem;" />
+    <p class="text-center small mb-0" style="color:#5a7a68;">© 2026 Loodusretked. Kõik õigused kaitstud.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById('toastBtn').addEventListener('click', function () {
+    const toastEl = document.getElementById('myToast');
+    const toast = new bootstrap.Toast(toastEl, { delay: 3500 });
+    toast.show();
+  });
+</script>
+</body>
+</html>
